@@ -1,0 +1,43 @@
+body {
+    background-color: lightsteelblue;
+}
+.cartas {
+    width: 100%;
+    padding-top: 20px;
+}
+.cartasorden {
+    width: 100%;
+    padding-top: 20px;
+}
+.carta{
+    display: inline-flex;
+    background: white;
+    margin: auto;
+    height: 100px;
+    width: 70px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid black;
+    position: relative;
+    margin-left: 10px;
+}
+.superior{
+    position: absolute;
+    left: 10px;
+    font-size: 25px;
+    top: 2px;
+}
+.inferior{
+    position: absolute;
+    right: 10px;
+    font-size: 25px;
+    bottom: 2px;
+}
+.numero{
+    position: absolute;
+    padding-top: 30px;
+    padding-left: 25px;
+    font-size: 35px;
+    font-weight: bold;
+    font-family: sans-serif;
+}

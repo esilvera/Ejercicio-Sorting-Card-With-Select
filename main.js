@@ -2,6 +2,7 @@ let arraycartas = [];
 
 function dibujacartas() {
     nrocartas = document.getElementById("nrocartas").value;
+    arraycartas = [];  // Borro el array para nuevo draw/sort
 
     let numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
     let pintas = ["♦", "♥", "♠", "♣"];
@@ -9,6 +10,7 @@ function dibujacartas() {
     let divcartas = document.querySelector('div.cartas');
 
     divcartas.innerHTML = " ";  //  Limpio el HTML al pulsar Dibujar para los ciclos
+    divcartasorden.innerHTML = " ";
 
     for (let index = 0; index < nrocartas; index++) {
 
@@ -55,7 +57,7 @@ function dibujacartas() {
 
         arraycartas[index] = { numeroobtenido, pintaobtenida }; // Lleno el arraycartas con los datos para ordenar
     }
-
+    console.log(arraycartas);
 };
 function obtenerValor(numero) {
     if (numero === 11) return "J";
@@ -66,8 +68,7 @@ function obtenerValor(numero) {
 };
 
 function ordenaCartas() {
-    //selectionSort(arraycartas)
-    console.log(selectionSort(arraycartas));
+    selectionSort(arraycartas)
 };
 
 let divcartasorden = document.querySelector('div.cartasorden');
@@ -81,55 +82,58 @@ const selectionSort = (arr) => {
                 change = 1;
                 minIndex = j;
             };
-        };
-        [arr[i].numeroobtenido, arr[minIndex].numeroobtenido] = [arr[minIndex].numeroobtenido, arr[i].numeroobtenido]
-        // ***********************************
-        if (change == 1) {
-            change = 0;
-            for (let i = 0; i < arr.length; i++) {
-                // ***
-                let divcarta = document.createElement("div");
-                divcarta.classList.add("carta");
 
-                numeroobtenido = arr[i].numeroobtenido;
-                pintaobtenida = arr[i].pintaobtenida;
+            
+            [arr[i].numeroobtenido, arr[minIndex].numeroobtenido] = [arr[minIndex].numeroobtenido, arr[i].numeroobtenido];
+            [arr[i].pintaobtenida, arr[minIndex].pintaobtenida] = [arr[minIndex].pintaobtenida, arr[i].pintaobtenida];
 
-                if (pintaobtenida === "♦" || pintaobtenida === "♥") {
-                    color = "red";
-                } else {
-                    color = "black"
-                }
+            // ***********************************
+            if (change == 1) {
+                change = 0;
+                for (let i = 0; i < arr.length; i++) {
+                    let divcarta = document.createElement("div");
+                    divcarta.classList.add("carta");
 
-                let a1 = document.createElement("a");
-                a1.classList.add("superior");
-                a1.style.color = color;
-                let figura = document.createTextNode(pintaobtenida);
-                a1.appendChild(figura);
-                divcarta.appendChild(a1);
+                    numeroobtenido = arr[i].numeroobtenido;
+                    pintaobtenida = arr[i].pintaobtenida;
 
-                let a2 = document.createElement("a");
-                a2.classList.add("numero");
-                a2.style.color = color;
-                let numero = document.createTextNode(obtenerValor(numeroobtenido));
-                a2.appendChild(numero);
-                divcarta.appendChild(a2);
+                    if (pintaobtenida === "♦" || pintaobtenida === "♥") {
+                        color = "red";
+                    } else {
+                        color = "black"
+                    }
 
-                let a3 = document.createElement("a");
-                a3.classList.add("inferior");
-                a3.style.color = color;
-                figura = document.createTextNode(pintaobtenida);
-                a3.appendChild(figura);
-                divcarta.appendChild(a3);
+                    let a1 = document.createElement("a");
+                    a1.classList.add("superior");
+                    a1.style.color = color;
+                    let figura = document.createTextNode(pintaobtenida);
+                    a1.appendChild(figura);
+                    divcarta.appendChild(a1);
 
-                divcartasorden.appendChild(divcarta);
+                    let a2 = document.createElement("a");
+                    a2.classList.add("numero");
+                    a2.style.color = color;
+                    let numero = document.createTextNode(obtenerValor(numeroobtenido));
+                    a2.appendChild(numero);
+                    divcarta.appendChild(a2);
 
-                if (i == arr.length - 1) {
-                    let saltoLinea = document.createElement("div");
-                    divcartasorden.appendChild(saltoLinea);
+                    let a3 = document.createElement("a");
+                    a3.classList.add("inferior");
+                    a3.style.color = color;
+                    figura = document.createTextNode(pintaobtenida);
+                    a3.appendChild(figura);
+                    divcarta.appendChild(a3);
+
+                    divcartasorden.appendChild(divcarta);
+
+                    if (i == arr.length - 1) {
+                        let saltoLinea = document.createElement("div");
+                        divcartasorden.appendChild(saltoLinea);
+                    }
                 }
             }
-        }
-        // ***********************************
+            // ***********************************
+        };
 
     };
     return arr;

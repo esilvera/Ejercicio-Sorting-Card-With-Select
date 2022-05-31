@@ -79,8 +79,8 @@ const selectionSort = (arr) => {
         let minIndex = i;
         for (let j = i + 1; j < arr.length; j++) {
             if (arr[j].numeroobtenido < arr[minIndex].numeroobtenido) {
-                change = 1;
                 minIndex = j;
+                change = 1;                
             };
 
             
@@ -89,6 +89,7 @@ const selectionSort = (arr) => {
 
             // ***********************************
             if (change == 1) {
+                minIndex = i;
                 change = 0;
                 for (let i = 0; i < arr.length; i++) {
                     let divcarta = document.createElement("div");
